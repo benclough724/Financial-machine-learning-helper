@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import requests
 import os
 import pandas as pd
+import json
 
 load_dotenv()
 
@@ -21,7 +22,8 @@ transactions = [
         "description": t["details"]["description"],
         "date": t["details"]["completed"]
     }
-    for t in data.get("transactions", [])  # Ensure "transactions" key exists
+    for t in data.get("transactions", [])   
+    # Ensure "transactions" key exists
 ]
 
 # Convert to Pandas DataFrame
@@ -30,6 +32,8 @@ df = pd.DataFrame(transactions)
 # Convert date to datetime format
 #df["date"] = pd.to_datetime(df["date"])
 
+
+print(json.dumps(data, indent=4))
 print(df.head())  # Display first few rows
 
 
