@@ -6,8 +6,15 @@ import json
 
 load_dotenv()
 
+#Retrieve OAuth 2.0 token
+url = "https://auth.truelayer-sandbox.com/connect/token" #Move to init file for ASE principals
+grant_type = "client_credentials" 
+client_id = "sandbox-personalbankingautomation-12a075"
+client_secret = "f62cf86a-b29d-490a-a25b-ea11a92cdd88"
+scope = "accounts"
+
 #Truelayer 
-url = "https://api.truelayer.com/data/v1/me"
+
 
 headers = {"accept": "application/json"}
 
