@@ -11,8 +11,8 @@ class TrueLayerAuth:
     print("2")
     def __init__(self):
         print("3")
-        self.client_id = os.getenv("client_ID")
-        self.client_secret = os.getenv("client_Secret")
+        self.client_id = os.getenv("CLIENT_ID")
+        self.client_secret = os.getenv("CLIENT_SECRET")
         self.token_url = "https://auth.truelayer-sandbox.com/connect/token"
         self.access_token = None
         self.token_expiry_time = 0  # Unix timestamp
@@ -23,17 +23,19 @@ class TrueLayerAuth:
         if self.access_token is None or time.time() >= self.token_expiry_time:
             print("5")
             print("Fetching new access token...")
-            body = {
+            payload = {
                 "grant_type": "client_credentials",
                 "client_id": self.client_id,
                 "client_secret": self.client_secret,
                 "scope": "accounts"
             }
             headers = {
+                "accept": "application/json",
                 "Content-Type": "application/x-www-form-urlencoded"
             }
+            print("Payload:", payload)
 
-            response = requests.post(self.token_url, data=body, headers=headers)
+            response = requests.post(self.token_url, data=payload, headers=headers)
 
             if response.status_code == 200:
                 data = response.json()
