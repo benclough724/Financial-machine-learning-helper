@@ -21,7 +21,7 @@ function App() {
             type="text"
             value={input1}
             onChange={(e) => setInput1(e.target.value)}
-            placeholder="Enter first value"
+            placeholder=""
           />
         </div>
         <div>
