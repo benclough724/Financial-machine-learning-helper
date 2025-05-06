@@ -48,8 +48,5 @@ class TrueLayerAuth:
 
         return self.access_token
 
-if __name__ == "__main__":
-    auth = TrueLayerAuth()
-    token = auth.get_access_token()
-    print(f"Your access token is: {token}")
+
      
