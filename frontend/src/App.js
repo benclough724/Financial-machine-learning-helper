@@ -1,54 +1,19 @@
-import React, { useState } from "react";
-import "./App.css";
+// App.jsx
+import React from "react";
+import { Header } from "./components/Header";
+import { Overview } from "./components/Overview";
+import { PredictionCard } from "./components/PredictionCard";
+import { TransactionTable } from "./components/TransactionTable";
 
-function App() {
-  const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
-  const [submittedData, setSubmittedData] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmittedData({ input1, input2 });
-  };
-
+export default function App() {
   return (
-    <div className="App">
-      <h1>Two Input Boxes App</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Input 1:</label>
-          <input
-            type="text"
-            value={input1}
-            onChange={(e) => setInput1(e.target.value)}
-            placeholder=""
-          />
-        </div>
-        <div>
-          <label>Input 2:</label>
-          <input
-            type="text"
-            value={input2}
-            onChange={(e) => setInput2(e.target.value)}
-            placeholder="Enter second value"
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-
-      {submittedData && (
-        <div className="output">
-          <h2>Submitted Data:</h2>
-          <p>
-            <strong>Input 1:</strong> {submittedData.input1}
-          </p>
-          <p>
-            <strong>Input 2:</strong> {submittedData.input2}
-          </p>
-        </div>
-      )}
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      <Header />
+      <main className="max-w-6xl mx-auto p-4 space-y-6">
+        <Overview />
+        <PredictionCard />
+        <TransactionTable />
+      </main>
     </div>
   );
 }
-
-export default App;
