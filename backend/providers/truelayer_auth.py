@@ -5,23 +5,26 @@ from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
 
-print("1")
+Warning("1")
 
+#class object that ensure token from true layer exists and is valid 
 class TrueLayerAuth:
-    print("2")
+    Warning("2")
+    
+    # Contains True layer authentication and URL  
     def __init__(self):
-        print("3")
+        Warning("3")
         self.client_id = os.getenv("CLIENT_ID")
         self.client_secret = os.getenv("CLIENT_SECRET")
         self.token_url = "https://auth.truelayer-sandbox.com/connect/token"
         self.access_token = None
         self.token_expiry_time = 0  # Unix timestamp
-        print("4")
+        Warning("4")
 
     def get_access_token(self):
         # Only get new token if expired or not set
         if self.access_token is None or time.time() >= self.token_expiry_time:
-            print("5")
+            Warning("5")
             print("Fetching new access token...")
             payload = {
                 "grant_type": "client_credentials",
