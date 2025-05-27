@@ -1,6 +1,5 @@
-import requests
-import os
+from truelayer_auth import 
 
-class main:
-    def main()
-        #declare os variable
+def main()
+    print
+
