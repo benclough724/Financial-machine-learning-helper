@@ -3,3 +3,5 @@ import os
 
 load_dotenv()
 
+def get_credentials
+    
