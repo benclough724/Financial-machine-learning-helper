@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\c3639326\OneDrive - Leeds Beckett University\Documents\GitHub\Financial-machine-learning-helper\backend
+set VIRTUAL_ENV=C:\Github\Financial-machine-learning-helper\backend
 
 if not defined PROMPT set PROMPT=$P$G
 
