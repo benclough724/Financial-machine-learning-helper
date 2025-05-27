@@ -26,3 +26,6 @@ dist-ssr
 # python environment/ authentication
 .env
 /Auth
+env/
+__pycache__/
+*.pyc
