@@ -14,13 +14,14 @@ df = pd.read_csv('./expense_data_1.csv')
 
 print(df.columns)
 
-
+ 
 plt.figure(figsize=(10,6))
 plt.plot(df['Date'], df['Amount'])
-plt.xlabel('Date')
-plt.ylabel('Amount')
-plt.title('Amount Over Time')
-plt.show()
+plt.show
+#plt.xlabel('Date')
+#plt.ylabel('Amount')
+#plt.title('Amount Over Time')
+#plt.show()
 
 #print("info:::", df.info())
 #print("describe:::", df.describe())
