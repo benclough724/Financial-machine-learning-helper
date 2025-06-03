@@ -1,6 +1,7 @@
 from pathlib import Path
 from pipeline.kaggle import download_and_unzip_kaggle
 from pipeline.data_loader import load_data
+from pipeline.preprocess import preprocess_data
 
 BASE_DIR = Path(__file__).parent  # Directory where main.py is
 DATA_DIR = BASE_DIR / "Datasets" # Dataset directory
@@ -15,8 +16,8 @@ def main():
     else:
         print(f"{CSV_FILE} found. Skipping download.")
 
-    df = load_data(CSV_FILE)
-    df = preprocess_data(df)
+    df = load_data(CSV_FILE) # load dataset
+    df = preprocess_data(df) # preprocess dataset
     print(df.head())
 
 if __name__ == "__main__":
