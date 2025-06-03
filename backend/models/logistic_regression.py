@@ -17,7 +17,8 @@ print(df.columns)
  
 plt.figure(figsize=(10,6))
 plt.plot(df['Date'], df['Amount'])
-plt.show
+plt.
+plt.plot
 #plt.xlabel('Date')
 #plt.ylabel('Amount')
 #plt.title('Amount Over Time')
