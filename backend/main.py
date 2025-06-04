@@ -1,7 +1,10 @@
+from fastapi import FastAPI 
 from pathlib import Path
 from pipeline.kaggle import download_and_unzip_kaggle
 from pipeline.data_loader import load_data
 from pipeline.preprocess import preprocess_data
+
+app = FastAPI()
 
 BASE_DIR = Path(__file__).parent  # Directory where main.py is
 DATA_DIR = BASE_DIR / "Datasets" # Dataset directory
@@ -15,10 +18,19 @@ def main():
         download_and_unzip_kaggle('tharunprabu/my-expenses-data', DATA_DIR)
     else:
         print(f"{CSV_FILE} found. Skipping download.")
-
-    df = load_data(CSV_FILE) # load dataset
-    df = preprocess_data(df) # preprocess dataset
-    print(df.head())
+        
+    # Get raw data and create REST API
+    app.get('/data/raw')
+    def get_raw_data():
+        df = load_data(CSV_FILE) # load datasets
+        return df.to_dict(orient="records")
+    
+    # Get preprocessed data and create REST API
+    app.get('/data/preprocessed')
+    def get_raw_data():
+        df = load_data(CSV_FILE) # load dataset
+        df = preprocess_data(df) # preprocess dataset
+        return df.to_dict(orient="records")
 
 if __name__ == "__main__":
     main()
