@@ -10,6 +10,9 @@ def remove_empty_columns(df):
 def fill_missing_values(df, strategy='mean'):
     """Fills in missing values using mean averaging."""
     logging.info(f"Filling missing values using strategy: {strategy}")
+    
+    # Loops amount of columns in database. Replaces all missing values.
+    # Uses meain 
     for col in df.columns:
         if df[col].isnull().any():
             if strategy == 'mean' and pd.api.types.is_numeric_dtype(df[col]):
