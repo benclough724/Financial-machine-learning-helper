@@ -13,11 +13,12 @@ CSV_FILE = DATA_DIR / "expense_data_1.csv"
 # main pipeline for project
 def main():
     # Download and unzip dataset if not already downloaded
-    if not CSV_FILE.exists():
-        print(f"{CSV_FILE} not found. Downloading dataset...")
-        download_and_unzip_kaggle('tharunprabu/my-expenses-data', DATA_DIR)
-    else:
-        print(f"{CSV_FILE} found. Skipping download.")
+    def get_user_data_choice():
+        if not CSV_FILE.exists():
+            print(f"{CSV_FILE} not found. Downloading dataset...")
+            download_and_unzip_kaggle('tharunprabu/my-expenses-data', DATA_DIR)
+        else:
+            print(f"{CSV_FILE} found. Skipping download.")
         
     # Get raw data and create REST API
     app.get('/data/raw')

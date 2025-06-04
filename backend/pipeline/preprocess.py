@@ -2,6 +2,14 @@ import pandas as pd
 import numpy as np
 import logging
 
+def preprocess_data(df):
+    """Applies the preprocessing pipeline."""
+    df = remove_empty_columns(df)
+    df = fill_missing_values(df)
+    df = encode_categoricals(df)
+    df = normalize_data(df)
+    return df
+
 def remove_empty_columns(df):
     """Removes columns with only NaN values."""
     logging.info("Removing empty columns...")
@@ -42,11 +50,4 @@ def normalize_data(df, columns=None, method='z-score'):
             df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
     return df
 
-def preprocess_data(df):
-    """Applies the preprocessing pipeline."""
-    df = remove_empty_columns(df)
-    df = fill_missing_values(df)
-    df = encode_categoricals(df)
-    df = normalize_data(df)
-    return df
 
