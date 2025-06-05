@@ -42,17 +42,19 @@ def get_raw_data():
     # return {"Hell: ben"} 
     df = load_data(CSV_FILE) # load datasets
     simple_cols = []
-    return df.to_dict(orient="records")
+    return df.head.to_json(orient="records")
     
 # Get preprocessed data and create REST API
 # 
 @app.get('/data/preprocessed')
 def get_preprocessed_data():
-    df = load_data(CSV_FILE) # load dataset
-    df = preprocess_data(df) # preprocess dataset
-    return df.head() 
-    
-    
+    try:
+        df = load_data(CSV_FILE) # load dataset
+        df = preprocess_data(df) # preprocess dataset
+        return df.head() 
+    catch Exception as e:
+        traceback.print_exc() # Print full error. Help with debugging
+        raise HTTPException(status_code=500, detail=str(e))    
     
     
 # if __name__ == "__main__":
