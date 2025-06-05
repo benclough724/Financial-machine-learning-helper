@@ -8,6 +8,7 @@ def preprocess_data(df):
     df = fill_missing_values(df)
     df = encode_categoricals(df)
     df = normalize_data(df)
+    # Move later test to see if add 
     return df
 
 def remove_empty_columns(df):

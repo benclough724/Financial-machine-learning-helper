@@ -2,9 +2,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI  
 from pathlib import Path
 import uvicorn
-from pipeline.kaggle import download_and_unzip_kaggle
-from pipeline.data_loader import load_data
-from pipeline.preprocess import preprocess_data
+from data_pipeline.kaggle import download_and_unzip_kaggle
+from data_pipeline.data_loader import load_data
+from data_pipeline.preprocess import preprocess_data
 
 app = FastAPI()
 
