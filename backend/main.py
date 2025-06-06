@@ -53,8 +53,7 @@ def get_preprocessed_data():
     df = load_data(CSV_FILE) # load dataset
     df = preprocess_data(df) # preprocess dataset
     return df.head().to_dict('records')
-       
-    
+
     
 # if __name__ == "__main__":
 #     uvicorn.run(app, host="0.0.0", port=8000)
