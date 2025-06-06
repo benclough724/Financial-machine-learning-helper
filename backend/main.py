@@ -5,6 +5,8 @@ import uvicorn
 from data_pipeline.kaggle import download_and_unzip_kaggle
 from data_pipeline.data_loader import load_data
 from data_pipeline.preprocess import preprocess_data
+import traceback
+from fastapi import HTTPException
 
 app = FastAPI()
 
@@ -41,20 +43,17 @@ def read_root():
 def get_raw_data():
     # return {"Hell: ben"} 
     df = load_data(CSV_FILE) # load datasets
-    simple_cols = []
-    return df.head.to_json(orient="records")
+    #simple_cols = []
+    return df.head().to_dict("records")
     
 # Get preprocessed data and create REST API
 # 
 @app.get('/data/preprocessed')
 def get_preprocessed_data():
-    try:
-        df = load_data(CSV_FILE) # load dataset
-        df = preprocess_data(df) # preprocess dataset
-        return df.head() 
-    catch Exception as e:
-        traceback.print_exc() # Print full error. Help with debugging
-        raise HTTPException(status_code=500, detail=str(e))    
+    df = load_data(CSV_FILE) # load dataset
+    df = preprocess_data(df) # preprocess dataset
+    return df.head().to_dict('records')
+       
     
     
 # if __name__ == "__main__":
