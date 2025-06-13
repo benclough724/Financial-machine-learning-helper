@@ -1,7 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI  
 from pathlib import Path
-import uvicorn
 from data_pipeline.kaggle import download_and_unzip_kaggle
 from data_pipeline.data_loader import load_data
 from data_pipeline.preprocess import preprocess_data
@@ -10,13 +9,13 @@ from fastapi import HTTPException
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Or specify your frontend URL
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # Or specify your frontend URL
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 BASE_DIR = Path(__file__).parent  # Directory where main.py is
 DATA_DIR = BASE_DIR / "Datasets" # Dataset directory
@@ -34,12 +33,12 @@ def get_user_data_choice():
     else:
         print(f"{CSV_FILE} found. Skipping download.")
 
-@app.get("/")
+#@app.get("/")
 def read_root():
     return {"message": "Welcome to the API!"}
     
 # Get raw data and create REST API
-@app.get('/data/raw')
+#@app.get('/data/raw')
 def get_raw_data():
     # return {"Hell: ben"} 
     df = load_data(CSV_FILE) # load datasets
@@ -48,12 +47,12 @@ def get_raw_data():
     
 # Get preprocessed data and create REST API
 # 
-@app.get('/data/preprocessed')
+#@app.get('/data/preprocessed')
 def get_preprocessed_data():
     df = load_data(CSV_FILE) # load dataset
     df = preprocess_data(df) # preprocess dataset
     return df.head().to_dict('records')
 
     
-# if __name__ == "__main__":
-#     uvicorn.run(app, host="0.0.0", port=8000)
+if __name__ == "__main__":
+    get_user_data_choice()
