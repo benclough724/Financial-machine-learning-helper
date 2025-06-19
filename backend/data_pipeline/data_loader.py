@@ -2,6 +2,7 @@ import pandas as pd
 import logging
 from pathlib import Path
 
+
 def load_data(file_path: Path) -> pd.DataFrame:
     logging.info(f"Loading data from {file_path.resolve()}")
     
@@ -12,5 +13,5 @@ def load_data(file_path: Path) -> pd.DataFrame:
     
     # Add preprocessing here if needed
     
-    return df
+    return df 
    

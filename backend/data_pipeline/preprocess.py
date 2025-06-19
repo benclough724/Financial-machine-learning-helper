@@ -2,15 +2,25 @@ import pandas as pd
 import numpy as np
 import logging
 
+df = pd.read_csv('./Datasets/expense_data_1.csv')
+
 def preprocess_data(df):
     """Applies the preprocessing pipeline."""
     df = remove_empty_columns(df)
     df = fill_missing_values(df)
     df = encode_categoricals(df)
     df = normalize_data(df)
+    df = convert_currency(df)
     # Move later test to see if add 
     
     return df
+
+def convert_currency(row, from_currency='INR', to_currency='USD'):
+    try:
+        return c.convert(from_currency, to_currency, row['Amount'])
+    except:
+        return None
+
 
 def remove_empty_columns(df):
     """Removes columns with only NaN values."""
