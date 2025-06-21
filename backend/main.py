@@ -25,7 +25,7 @@ CSV_FILE = DATA_DIR / "expense_data_1.csv"
 
 # main pipeline for project
 
-  # Download and unzip dataset if not already downloaded
+# Download and unzip dataset if not already downloaded
 def get_user_data_choice():
     if not CSV_FILE.exists():
         print(f"{CSV_FILE} not found. Downloading dataset...")
