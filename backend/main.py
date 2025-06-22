@@ -17,21 +17,32 @@ app = FastAPI()
 #     allow_headers=["*"],
 # )
 
-BASE_DIR = Path(__file__).parent  # Directory where main.py is
-DATA_DIR = BASE_DIR / "Datasets" # Dataset directory
-CSV_FILE = DATA_DIR / "expense_data_1.csv"
-
+# Define dataset info
+DATA_DIR = Path(__file__).parent / "Datasets"
+KAGGLE_DATASETS = {
+    "expense_data": {
+        "kaggle_id": "tharunprabu/my-expenses-data",
+        "path": DATA_DIR / "expense_data_1.csv"
+    },
+    "budget_data": {
+        "kaggle_id": "ismetsemedov/personal-budget-transactions-dataset",
+        "path": DATA_DIR / "budget_data.csv"
+    }
+}
 
 
 # main pipeline for project
 
 # Download and unzip dataset if not already downloaded
 def get_user_data_choice():
-    if not CSV_FILE.exists():
-        print(f"{CSV_FILE} not found. Downloading dataset...")
-        download_and_unzip_kaggle('tharunprabu/my-expenses-data', DATA_DIR)
+    for path in kaggle_datasets:
+        if not Path.exists:
+            print(f"{Path.name} not found. Downloading dataset...")
+            download_and_unzip_kaggle(kaggle_datasets[__name__], path.parent)
+
+            
     else:
-        print(f"{CSV_FILE} found. Skipping download.")
+        print(f"{Path.name} found. Skipping download.")
 
 #@app.get("/")
 def read_root():
