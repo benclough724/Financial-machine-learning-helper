@@ -2,8 +2,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI  
 from pathlib import Path
 from data_pipeline.kaggle import download_and_unzip_kaggle
-from data_pipeline.data_loader import load_data
-from data_pipeline.preprocess import preprocess_data
+# from data_pipeline.data_loader import load_data
+# from data_pipeline.preprocess import preprocess_data
 import traceback
 from fastapi import HTTPException
 
@@ -35,14 +35,13 @@ KAGGLE_DATASETS = {
 
 # Download and unzip dataset if not already downloaded
 def get_user_data_choice():
-    for path in kaggle_datasets:
-        if not Path.exists:
-            print(f"{Path.name} not found. Downloading dataset...")
-            download_and_unzip_kaggle(kaggle_datasets[__name__], path.parent)
-
-            
-    else:
-        print(f"{Path.name} found. Skipping download.")
+    for key, dataset in KAGGLE_DATASETS.items():
+        print(f"{key=} => {dataset=}")
+        # if not dataset["path"].exists():
+        #     print(f"{dataset["path"].name} not found. Downloading dataset...")
+        #     download_and_unzip_kaggle(KAGGLE_DATASETS["kaggle_id"], KAGGLE_DATASETS["path"])               
+        # else:
+        #     print(f"{dataset["path"].name} found. Skipping download.")
 
 #@app.get("/")
 def read_root():
@@ -52,7 +51,7 @@ def read_root():
 #@app.get('/data/raw')
 def get_raw_data():
     # return {"Hell: ben"} 
-    df = load_data(CSV_FILE) # load datasets
+    df = load_data(KAGGLE_DATASETS.items) # load datasets
     #simple_cols = []
     return df.head().to_dict("records")
     
