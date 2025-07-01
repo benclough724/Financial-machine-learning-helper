@@ -4,26 +4,11 @@ from pathlib import Path
 from data_pipeline.kaggle import download_and_unzip_kaggle
 from data_pipeline.data_loader import load_data
 from data_pipeline.preprocess import preprocess_data
+from config.datasets import KAGGLE_DATASETS
 import traceback
 from fastapi import HTTPException
 
 app = FastAPI()
-
-
-
-# Define dataset info
-DATA_DIR = Path(__file__).parent / "Datasets"
-KAGGLE_DATASETS = {
-    "expense_data": {
-        "kaggle_id": "tharunprabu/my-expenses-data",
-        "path": DATA_DIR / "expense_data_1.csv"
-    },
-    "budget_data": {
-        "kaggle_id": "ismetsemedov/personal-budget-transactions-dataset",
-        "path": DATA_DIR / "budget_data.csv"
-    }
-}
-
 
 # main pipeline for project
 
@@ -37,8 +22,8 @@ def download_dataset():
                 download_and_unzip_kaggle(dataset["kaggle_id"], dataset["path"])               
             else:
                 print(f"{dataset["path"].name} found. Skipping download.")
-            preprocess_data = get_preprocessed_data(dataset['path'])
-            print(f"Preprocessed sample for {key}:\n{preprocessed}\n")
+            #preprocess_data = get_preprocessed_data(dataset['path'])
+            #print(f"Preprocessed sample for {key}:\n{preprocessed}\n")
     except Exception as e: 
         print(f"Error downloading {dataset['kaggle_id']}: {str(e)}")
         traceback.print_exc()
@@ -65,4 +50,4 @@ def get_preprocessed_data():
 
     
 if __name__ == "__main__":
-    get_user_data_choice()
+    download_dataset()

@@ -1,8 +1,26 @@
 import pandas as pd
 import numpy as np
 import logging
+from config.datasets import KAGGLE_DATASETS
 
-df = pd.read_csv('./Datasets/expense_data_1.csv')
+
+def preprocess_all_datasets():
+    """_summary_
+
+    Returns:
+        result: returns the result of the preprocessed dataset
+    """
+    results = {}
+    for name, dataset in KAGGLE_DATASETS.items():
+        try:
+            print(f"Preprocessing: {name}")
+            df = pd.read_csv(dataset["path"])
+            preprocessed = preprocess_data(df)
+            results[name] = preprocessed
+        except Exception as e:
+            print(f"Error preprocessing {name}: {e}")
+            results[name] = None
+    return results
 
 def preprocess_data(df):
     """Applies the preprocessing pipeline."""
@@ -10,16 +28,17 @@ def preprocess_data(df):
     df = fill_missing_values(df)
     df = encode_categoricals(df)
     df = normalize_data(df)
-    df = convert_currency(df)
+    # df = convert_currency(df)
     # Move later test to see if add 
     
     return df
 
-def convert_currency(row, from_currency='INR', to_currency='USD'):
-    try:
-        return c.convert(from_currency, to_currency, row['Amount'])
-    except:
-        return None
+#Potentially add probably not though(currency conversion)
+# def convert_currency(row, from_currency='INR', to_currency='USD'):
+#     try:
+#         return c.convert(from_currency, to_currency, row['Amount'])
+#     except:
+#         return None
 
 
 def remove_empty_columns(df):
@@ -28,7 +47,7 @@ def remove_empty_columns(df):
     return df.dropna(axis=1, how='all')
 
 def fill_missing_values(df, strategy='mean'):
-    """Fills in missing values using mean averaging."""
+    "Fills in missing values using mean averaging."
     logging.info(f"Filling missing values using strategy: {strategy}")
     
     # Loops amount of columns in database. Replaces all missing values.

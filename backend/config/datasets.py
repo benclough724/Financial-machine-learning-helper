@@ -1,6 +1,5 @@
 from pathlib import Path
-
-DATA_DIR = Path(__file__).parent.parent / "Datasets"
+from config.paths import DATA_DIR
 
 KAGGLE_DATASETS = {
     "expense_data": {
