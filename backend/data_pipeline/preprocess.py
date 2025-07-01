@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import logging
 from config.datasets import KAGGLE_DATASETS
-
+from config.paths import PROCESSED_DATA_DIR
 
 def preprocess_all_datasets():
     """_summary_
@@ -16,7 +16,7 @@ def preprocess_all_datasets():
             print(f"Preprocessing: {name}")
             df = pd.read_csv(dataset["path"])
             preprocessed = preprocess_data(df)
-            output_path = PREPROCESSED_DATA_DIR / f"{name}_preprocessed.csv"
+            output_path = PROCESSED_DATA_DIR / f"{name}_preprocessed.csv"
             preprocessed.to_csv(output_path, index=False)
             results[name] = preprocessed
         except Exception as e:

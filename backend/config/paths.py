@@ -12,6 +12,6 @@ DATA_DIR = BASE_DIR / "data"
 
 
 # dataset directories (raw and unprocessed)
-DATA_DIR = DATA_DIR /"raw"
-DATA_DIR = DATA_DIR /"processed"
+RAW_DATA_DIR = DATA_DIR /"unprocessed"
+PROCESSED_DATA_DIR = DATA_DIR /"processed"
 
