@@ -28,17 +28,20 @@ KAGGLE_DATASETS = {
 # main pipeline for project
 
 # Download and unzip dataset if not already downloaded
-def get_user_data_choice():
+def download_dataset():
     try:
         for key, dataset in KAGGLE_DATASETS.items():
-            # print(f"{key=} => {dataset=}")
+            # print(f"{key=} => {dataset=}")q
             if not dataset["path"].exists():
                 print(f"{dataset["path"].name} not found. Downloading dataset...")
                 download_and_unzip_kaggle(dataset["kaggle_id"], dataset["path"])               
             else:
                 print(f"{dataset["path"].name} found. Skipping download.")
+            preprocess_data = get_preprocessed_data(dataset['path'])
+            print(f"Preprocessed sample for {key}:\n{preprocessed}\n")
     except Exception as e: 
-        
+        print(f"Error downloading {dataset['kaggle_id']}: {str(e)}")
+        traceback.print_exc()
 
 #@app.get("/")
 def read_root():
@@ -56,7 +59,7 @@ def get_raw_data():
 # 
 #@app.get('/data/preprocessed')
 def get_preprocessed_data():
-    df = load_data(CSV_FILE) # load dataset
+    df = load_data(datase) # load dataset
     df = preprocess_data(df) # preprocess dataset
     return df.head().to_dict('records')
 
