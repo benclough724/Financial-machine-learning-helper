@@ -19,6 +19,7 @@ def preprocess_all_datasets():
             output_path = PROCESSED_DATA_DIR / f"{name}_preprocessed.csv"
             preprocessed.to_csv(output_path, index=False)
             results[name] = preprocessed
+            print(1)
         except Exception as e:
             print(f"Error preprocessing {name}: {e}")
             results[name] = None
