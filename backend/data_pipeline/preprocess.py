@@ -16,6 +16,8 @@ def preprocess_all_datasets():
             print(f"Preprocessing: {name}")
             df = pd.read_csv(dataset["path"])
             preprocessed = preprocess_data(df)
+            output_path = PREPROCESSED_DATA_DIR / f"{name}_preprocessed.csv"
+            preprocessed.to_csv(output_path, index=False)
             results[name] = preprocessed
         except Exception as e:
             print(f"Error preprocessing {name}: {e}")

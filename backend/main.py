@@ -19,7 +19,7 @@ def download_dataset():
             # print(f"{key=} => {dataset=}")q
             if not dataset["path"].exists():
                 print(f"{dataset["path"].name} not found. Downloading dataset...")
-                download_and_unzip_kaggle(dataset["kaggle_id"], dataset["path"])               
+                download_and_unzip_kaggle(dataset["kaggle_id"], dataset["path"]) # Uses names from the dictionary to find and download datasets from Kaggle          
             else:
                 print(f"{dataset["path"].name} found. Skipping download.")
             #preprocess_data = get_preprocessed_data(dataset['path'])
@@ -44,7 +44,7 @@ def get_raw_data():
 # 
 #@app.get('/data/preprocessed')
 def get_preprocessed_data():
-    df = load_data(datase) # load dataset
+    df = load_data(dataset) # load dataset
     df = preprocess_data(df) # preprocess dataset
     return df.head().to_dict('records')
 
