@@ -30,3 +30,15 @@ def clean_amount_column(df, amount_col='Amount'):
     df[amount_col] = df[amount_col].astype(str).str.replace('[^0-9.-]', '', regex=True)
     df[amount_col] = pd.to_numeric(df[amount_col], errors='coerce')
     return df
+
+def engineer_features(df):
+    """Runs the full feature engineering pipeline."""
+    df = clean_amount_column(df, 'Amount')
+    df = add_date_features(df, 'Date')
+    df = add_transaction_type_flag(df, 'TransactionType')
+    df = add_rolling_features(df, 'Amount', 'Date')
+
+    # Drop rows with missing required values
+    df = df.dropna(subset=['Amount', 'Date', 'IsIncome'])
+
+    return df
