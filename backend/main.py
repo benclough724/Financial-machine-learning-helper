@@ -29,13 +29,16 @@ KAGGLE_DATASETS = {
 
 # Download and unzip dataset if not already downloaded
 def get_user_data_choice():
-    for key, dataset in KAGGLE_DATASETS.items():
-        # print(f"{key=} => {dataset=}")
-        if not dataset["path"].exists():
-            print(f"{dataset["path"].name} not found. Downloading dataset...")
-            download_and_unzip_kaggle(dataset["kaggle_id"], dataset["path"])               
-        else:
-            print(f"{dataset["path"].name} found. Skipping download.")
+    try:
+        for key, dataset in KAGGLE_DATASETS.items():
+            # print(f"{key=} => {dataset=}")
+            if not dataset["path"].exists():
+                print(f"{dataset["path"].name} not found. Downloading dataset...")
+                download_and_unzip_kaggle(dataset["kaggle_id"], dataset["path"])               
+            else:
+                print(f"{dataset["path"].name} found. Skipping download.")
+    except Exception as e: 
+        
 
 #@app.get("/")
 def read_root():
@@ -44,7 +47,7 @@ def read_root():
 # Get raw data and create REST API
 #@app.get('/data/raw')
 def get_raw_data():
-    # return {"Hell: ben"} 
+    # return {"Hello: ben"} 
     df = load_data(KAGGLE_DATASETS) # load datasets
     #simple_cols = []
     return df.head().to_dict("records")
