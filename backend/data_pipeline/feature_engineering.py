@@ -24,3 +24,9 @@ def add_transaction_type_flag(df, type_col='TransactionType'):
     """Converts 'Income' / 'Expense' to binary flag."""
     df['IsIncome'] = df[type_col].str.lower().map({'income': 1, 'expense': 0})
     return df
+
+def clean_amount_column(df, amount_col='Amount'):
+    """Removes symbols, commas, and converts amount to float."""
+    df[amount_col] = df[amount_col].astype(str).str.replace('[^0-9.-]', '', regex=True)
+    df[amount_col] = pd.to_numeric(df[amount_col], errors='coerce')
+    return df
