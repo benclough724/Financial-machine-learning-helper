@@ -1,5 +1,10 @@
 from pathlib import Path
 
+"""
+This module defines the paths used in the project.
+It includes the base directory, data directories, and ensures that the necessary folders exist.
+"""
+
 # Base directory (project root)
 BASE_DIR = Path(__file__).parent.parent
 
