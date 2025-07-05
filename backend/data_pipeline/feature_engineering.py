@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 
 class FeatureEngineering:
+    """
+    FeatureEngineering class applies a series of transformations to a DataFrame to prepare it for analysis.
+    It includes methods to clean the amount column, add date features, create rolling features,
+    """
     def __init__(self, df):
         """
         Runs the full feature engineering pipeline.
