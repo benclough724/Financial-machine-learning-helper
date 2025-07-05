@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
 
-class FeatureEngineering:
-    """
+"""
     FeatureEngineering class applies a series of transformations to a DataFrame to prepare it for analysis.
     It includes methods to clean the amount column, add date features, create rolling features,
     """
+class FeatureEngineering:
+    
     def __init__(self, df):
         """
         Runs the full feature engineering pipeline.
@@ -15,9 +16,10 @@ class FeatureEngineering:
         Returns:
             pd.DataFrame: DataFrame with engineered features.
         """
-        df = clean_amount_column(df, 'Amount')
-        df = add_date_features(df, 'Date')
-        df = add_transaction_type_flag(df, 'TransactionType')
+        df = clean_amount_column(df, 'Amount') # Clean the 'Amount' column by removing symbols and converting to float
+        df = add_date_features(df, 'Date') # Add date features to the DataFrame
+        df = rolling_features(df, 'Amount', 'Date') # Add rolling features based on
+        df = add_transaction_type_flag(df, 'TransactionType') 
         df = add_rolling_features(df, 'Amount', 'Date')
 
         # Drop rows with missing required values
