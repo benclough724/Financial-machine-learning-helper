@@ -11,21 +11,23 @@ class PreprocessData:
     and normalize numerical data.
     """
     
-    # def __init__(self, df):
-    #     """
-    #     Runs the full preprocessing pipeline.
+    def __init__(self, df):
+        """
+        Runs the full preprocessing pipeline.
         
-    #     Parameters:
-    #         df (pd.DataFrame): DataFrame containing the raw data.
-    #     Returns:
-    #         pd.DataFrame: DataFrame with preprocessed data.
-    #     """
-        
-    #     # df = convert_currency(df)
-    #     # Move later test to see if add 
+        Parameters:
+            df (pd.DataFrame): DataFrame containing the raw data.
+        Returns:
+            pd.DataFrame: DataFrame with preprocessed data.
+        """
+        self.df = df.copy()  # Prevents modifying the original df
+
+        # df = convert_currency(df)
+        # Move later test to see if add 
     
-  
-    def preprocess_data(df):
+        self.df = self.preprocess_data(self.df)  # Applies the preprocessing pipeline
+    
+    def preprocess_data(self, df):
         """
         Applies the preprocessing pipeline.
             
@@ -51,7 +53,6 @@ class PreprocessData:
     #     except:
     #         return None
 
-    @staticmethod
     def remove_empty_columns(df):
         """
         Removes columns with only NaN values.
@@ -95,7 +96,6 @@ class PreprocessData:
                     df[col] = df[col].fillna('missing')
         return df
 
-    @staticmethod
     def encode_categoricals(df, encoding='one-hot'):
         """Encodes categorical variables.
         
@@ -114,7 +114,6 @@ class PreprocessData:
             df = pd.get_dummies(df, drop_first=True)
         return df
     
-    @staticmethod
     def normalize_data(df, columns=None, method='z-score'):
         """Normalizes specified columns or all numerical columns.
         

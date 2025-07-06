@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>backend.data_pipeline package &#8212; Financial inidication - Machine learning project 2024 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=6fefd858"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="backend-data-pipeline-package">
+<h1>backend.data_pipeline package<a class="headerlink" href="#backend-data-pipeline-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="backend-data-pipeline-currency-conversion-module">
+<h2>backend.data_pipeline.currency_conversion module<a class="headerlink" href="#backend-data-pipeline-currency-conversion-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="backend-data-pipeline-data-loader-module">
+<h2>backend.data_pipeline.data_loader module<a class="headerlink" href="#backend-data-pipeline-data-loader-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-backend.data_pipeline.feature_engineering">
+<span id="backend-data-pipeline-feature-engineering-module"></span><h2>backend.data_pipeline.feature_engineering module<a class="headerlink" href="#module-backend.data_pipeline.feature_engineering" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="backend.data_pipeline.feature_engineering.FeatureEngineering">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backend.data_pipeline.feature_engineering.</span></span><span class="sig-name descname"><span class="pre">FeatureEngineering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/feature_engineering.html#FeatureEngineering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.feature_engineering.FeatureEngineering" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="backend.data_pipeline.feature_engineering.FeatureEngineering.add_transaction_type_flag">
+<span class="sig-name descname"><span class="pre">add_transaction_type_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TransactionType'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/feature_engineering.html#FeatureEngineering.add_transaction_type_flag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.feature_engineering.FeatureEngineering.add_transaction_type_flag" title="Link to this definition">¶</a></dt>
+<dd><p>Converts ‘Income’ / ‘Expense’ to binary flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame containing the transaction type column.</p></li>
+<li><p><strong>type_col</strong> (<em>str</em>) – Name of the transaction type column in the DataFrame.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with an additional column ‘IsIncome’ where ‘Income’ is 1 and ‘Expense’ is 0.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="backend.data_pipeline.feature_engineering.FeatureEngineering.clean_amount_column">
+<span class="sig-name descname"><span class="pre">clean_amount_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Amount'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/feature_engineering.html#FeatureEngineering.clean_amount_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.feature_engineering.FeatureEngineering.clean_amount_column" title="Link to this definition">¶</a></dt>
+<dd><p>Removes symbols, commas, and converts amount to float.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame containing the amount column.</p></li>
+<li><p><strong>amount_col</strong> (<em>str</em>) – Name of the amount column in the DataFrame.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with the cleaned amount column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="backend.data_pipeline.feature_engineering.FeatureEngineering.date_features">
+<span class="sig-name descname"><span class="pre">date_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Date'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/feature_engineering.html#FeatureEngineering.date_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.feature_engineering.FeatureEngineering.date_features" title="Link to this definition">¶</a></dt>
+<dd><p>Extracts useful time-based features from the date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame containing the date column.</p></li>
+<li><p><strong>date_col</strong> (<em>str</em>) – Name of the date column in the DataFrame.f</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with additional time-based features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Adds the following features:</dt><dd><ul class="simple">
+<li><p>DayOfWeek: Numeric representation of the day of the week (0=Monday, 6=Sunday).</p></li>
+<li><p>Day: Day of the month.</p></li>
+<li><p>Month: Month of the year.</p></li>
+<li><p>Year: Year of the date.</p></li>
+<li><p>IsWeekend: Boolean indicating if the date falls on a weekend (Saturday or Sunday).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="backend.data_pipeline.feature_engineering.FeatureEngineering.rolling_features">
+<span class="sig-name descname"><span class="pre">rolling_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Amount'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Date'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/feature_engineering.html#FeatureEngineering.rolling_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.feature_engineering.FeatureEngineering.rolling_features" title="Link to this definition">¶</a></dt>
+<dd><p>Adds rolling average/spending features based on amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame containing the amount and date columns.</p></li>
+<li><p><strong>amount_col</strong> (<em>str</em>) – Name of the amount column in the DataFrame.</p></li>
+<li><p><strong>date_col</strong> (<em>str</em>) – Name of the date column in the DataFrame.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-backend.data_pipeline.kaggle_loader">
+<span id="backend-data-pipeline-kaggle-loader-module"></span><h2>backend.data_pipeline.kaggle_loader module<a class="headerlink" href="#module-backend.data_pipeline.kaggle_loader" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="backend.data_pipeline.kaggle_loader.KaggleLoader">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backend.data_pipeline.kaggle_loader.</span></span><span class="sig-name descname"><span class="pre">KaggleLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/kaggle_loader.html#KaggleLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.kaggle_loader.KaggleLoader" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This module provides functionality to download and unzip Kaggle datasets.
+It uses the Kaggle API to authenticate and download datasets specified by their Kaggle IDs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="backend.data_pipeline.kaggle_loader.KaggleLoader.get_kaggle_data">
+<span class="sig-name descname"><span class="pre">get_kaggle_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/backend/data_pipeline/kaggle_loader.html#KaggleLoader.get_kaggle_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend.data_pipeline.kaggle_loader.KaggleLoader.get_kaggle_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="backend-data-pipeline-kaggle-test-module">
+<h2>backend.data_pipeline.kaggle_test module<a class="headerlink" href="#backend-data-pipeline-kaggle-test-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="backend-data-pipeline-preprocess-module">
+<h2>backend.data_pipeline.preprocess module<a class="headerlink" href="#backend-data-pipeline-preprocess-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="backend-data-pipeline-visualisation-module">
+<h2>backend.data_pipeline.visualisation module<a class="headerlink" href="#backend-data-pipeline-visualisation-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-backend.data_pipeline">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-backend.data_pipeline" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Financial inidication - Machine learning project</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Ben Clough.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/backend.data_pipeline.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

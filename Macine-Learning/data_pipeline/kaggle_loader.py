@@ -2,11 +2,11 @@ import kaggle
 from pathlib import Path
 import logging
 
-"""
-This module provides functionality to download and unzip Kaggle datasets.
-It uses the Kaggle API to authenticate and download datasets specified by their Kaggle IDs.
-"""
 class KaggleLoader:
+    """
+    This module provides functionality to download and unzip Kaggle datasets.
+    It uses the Kaggle API to authenticate and download datasets specified by their Kaggle IDs.
+    """
     def __init__(self, dataset_name: str, download_path: Path):
         self.dataset_name = dataset_name
         self.download_path = download_path
