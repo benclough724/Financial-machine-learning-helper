@@ -41,7 +41,7 @@ class PreprocessData:
         df = PreprocessData.remove_empty_columns(df)
         df = PreprocessData.fill_missing_values(df)
         df = PreprocessData.encode_categoricals(df)
-        df = PreprocessData.normalize_data(df)
+        df = PreprocessData.normalise_data(df)
         return df
         
    
@@ -114,7 +114,7 @@ class PreprocessData:
             df = pd.get_dummies(df, drop_first=True)
         return df
     
-    def normalize_data(df, columns=None, method='z-score'):
+    def normalise_data(df, columns=None, method='z-score'):
         """Normalizes specified columns or all numerical columns.
         
         Parameters:

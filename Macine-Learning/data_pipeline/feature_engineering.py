@@ -6,22 +6,29 @@ import numpy as np
     It includes methods to clean the amount column, add date features, create rolling features,
     """
 class FeatureEngineering:
-    
-    def __init__(self, df):
+
+    def feature_engineering_pipeline(self, df):
         """
-        Runs the full feature engineering pipeline.
+        Applies the feature engineering pipeline.
+        
+        Function performs the following steps:
+            1. Cleans the 'Amount' column by removing symbols and converting to float.
+            2. Adds date features to the DataFrame.
+            3. Adds rolling features based on 'Amount' and 'Date'.
+            4. Converts 'Income' / 'Expense' to binary flag.
+            5. Drops rows with missing required values.
         
         Parameters:
             df (pd.DataFrame): DataFrame containing the raw data.
         Returns:
             pd.DataFrame: DataFrame with engineered features.
         """
+        # Apply feature engineering steps
         df = clean_amount_column(df, 'Amount') # Clean the 'Amount' column by removing symbols and converting to float
         df = add_date_features(df, 'Date') # Add date features to the DataFrame
         df = rolling_features(df, 'Amount', 'Date') # Add rolling features based on
-        df = add_transaction_type_flag(df, 'TransactionType') 
-        df = add_rolling_features(df, 'Amount', 'Date')
-
+        df = transaction_type_flag(df, 'TransactionType') 
+        
         # Drop rows with missing required values
         df = df.dropna(subset=['Amount', 'Date', 'IsIncome'])
 
@@ -67,7 +74,7 @@ class FeatureEngineering:
         df['CumulativeSum'] = df[amount_col].cumsum()
         return df
 
-    def add_transaction_type_flag(df, type_col='TransactionType'):
+    def transaction_type_flag(df, type_col='TransactionType'):
         """
         Converts 'Income' / 'Expense' to binary flag.
         
