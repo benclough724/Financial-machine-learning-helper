@@ -17,7 +17,7 @@ def main():
     df_dict = loader.get_data()  # Load data from Kaggle datasets
     
     preprocessed_dfs = {}
-    print(df_dict.keys())
+    #print(df_dict.keys())
     for name, df in df_dict.items():
         df = df_dict['pat']
         df_processed = PreprocessData.preprocess_data(df)

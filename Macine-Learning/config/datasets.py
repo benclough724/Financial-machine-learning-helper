@@ -11,4 +11,8 @@ KAGGLE_DATASETS = {
         "kaggle_id": "tharunprabu/my-expenses-data",
         "path": RAW_DATA_DIR / "expense_data_1.csv"
     },
+    "personal_budget": {
+        "kaggle_id": "ismetsemedov/personal-budget-transactions-dataset",
+        "path": RAW_DATA_DIR / "personal_budget.csv"
+    }
 }
