@@ -15,7 +15,7 @@ class DataLoader(Exception):
         self.message = message
         logging.error(message)
     
-    def get_data(self) -> List[pd.DataFrame]:
+    def get_data(self, kaggle_id, download_path) -> List[pd.DataFrame]:
         """
         Loads data for financial datasets from Kaggle.
         Itterates through the KAGGLE_DATASETS dictionary, checks if the dataset file exists,
@@ -29,10 +29,9 @@ class DataLoader(Exception):
                 dfList = {}
                 file_path = dataset["path"] # Gets the path to the dataset from the dictionary
                 if not file_path.exists(): # Checks if the file exists at the specified path
-                    print(f"{dataset["path"].name} not found. Downloading dataset...")
-                    KaggleLoader.get_kaggle_data(dataset["kaggle_id"], file_path) # Uses names from the dictionary to find and download datasets from Kaggle       
-                     
-                    
+                    print(f"{file_path.name} not found. Downloading dataset...")
+                    loader = KaggleLoader() # Initializes the KaggleLoader class
+                    loader.get_kaggle_data(dataset["kaggle_id"], file_path) # Uses names from the dictionary to find and download datasets from Kaggle
                 else:
                     print(f"{file_path.name} found. Skipping download.") 
                     
@@ -43,9 +42,9 @@ class DataLoader(Exception):
             print(f"Error downloading {dataset['kaggle_id']}: {str(e)}") # Log error to the console
             traceback.print_exc() # Display the full traceback for debugging
 
-            # If the dataset file is not found after attempting to download, raise an error
-            if not dataset["path"].exists():
-                raise FileNotFoundError(f"Dataset {key} not found at {dataset['path']}. Please download it first.")
+            # # If the dataset file is not found after attempting to download, raise an error
+            # if not dataset["path"].exists():
+            #     raise FileNotFoundError(f"Dataset {key} not found at {dataset['path']}. Please download it first.")sssss
       
         
         

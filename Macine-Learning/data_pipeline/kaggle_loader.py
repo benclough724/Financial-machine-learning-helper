@@ -13,11 +13,11 @@ class KaggleLoader:
         logging.info(f"KaggleLoader initialized for dataset: {self.dataset_name} at {self.download_path.resolve()}")
     
     """Load provides a place in which """
-    def get_kaggle_data(self):
+    def get_kaggle_data(self, dataset_name: str, download_path: Path):
         try:
             logging.info(f"Downloading and unzipping Kaggle dataset: {self.dataset_name} to {self.download_path.resolve()}")
         
-            self.download_path.mkdir(parents=True, exist_ok=True)  # Ensure folder exists
+            download_path.mkdir(parents=True, exist_ok=True)  # Ensure folder exists
         
             # Download and unzip dataset
             kaggle.api.authenticate()

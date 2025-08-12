@@ -12,18 +12,25 @@ def main():
     Main function to execute the data loading and preprocessing pipeline.
     This function initializes the data loader, retrieves datasets from Kaggle,
     """
-    # call the data loader to download and unzip the dataset
-    loader = DataLoader(KAGGLE_DATASETS)
-    df_dict = loader.get_data()  # Load data from Kaggle datasets
     
-    preprocessed_dfs = {}
-    #print(df_dict.keys())
-    for name, df in df_dict.items():
-        df = df_dict['pat']
-        df_processed = PreprocessData.preprocess_data(df)
-        preprocessed_dfs[name] = df_processed
-        print(each_df.head())
-        PreprocessData.preprocess_data(df)
+    
+    
+    #print(df_dict)
+
+    # preprocessed_dfs = {}
+    # #print(df_dict.keys())
+    for name, dataset_info in KAGGLE_DATASETS.items():
+        # print("this is name: " + name)
+        # print("this is DF: " + str(df))
+        loader = DataLoader(KAGGLE_DATASETS) # call the data loader to download and unzip the dataset
+        df = loader.get_data(dataset_info["kaggle_id"], dataset_info["path"])  # Load data from Kaggle datasets
+        # print(df.head())
+        # #df_dict = loader.get_data()  # Load data from Kaggle datasets
+        # #df = df_dict['path']
+        # #df_processed = PreprocessData.preprocess_data(df)
+        # #preprocessed_dfs[name] = df_processed
+        # #print(each_df.head())
+        # PreprocessData.preprocess_data(df)
         
     
     # df = engineer_features(df)
