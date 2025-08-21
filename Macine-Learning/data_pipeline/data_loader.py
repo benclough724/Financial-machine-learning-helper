@@ -13,7 +13,7 @@ class DataLoader(Exception):
     def __init__(self, KAGGLE_DATASETS: dict, message: str = "Data Loader initialised"): # Initializes the DataLoader class 
         self.KAGGLE_DATASETS = KAGGLE_DATASETS
         self.message = message
-        logging.error(message)
+        logging.info(message)
     
     def get_data(self, kaggle_id, download_path) -> List[pd.DataFrame]:
         """
@@ -26,31 +26,31 @@ class DataLoader(Exception):
         """    
         try:
             for key, dataset in KAGGLE_DATASETS.items(): # Loops over each financial dataset in the KAGGLE_DATASETS dictionary
+                # print(dataset["kaggle_id"])
+                # print(dataset["path"])
+
                 dfList = {}
                 file_path = dataset["path"] # Gets the path to the dataset from the dictionary
                 if not file_path.exists(): # Checks if the file exists at the specified path
                     print(f"{file_path.name} not found. Downloading dataset...")
-                    loader = KaggleLoader() # Initializes the KaggleLoader class
+                    loader = KaggleLoader(dataset["kaggle_id"], file_path) # Initializes the KaggleLoader class
                     loader.get_kaggle_data(dataset["kaggle_id"], file_path) # Uses names from the dictionary to find and download datasets from Kaggle
                 else:
                     print(f"{file_path.name} found. Skipping download.") 
-                    
+                        
                 # Load the datasets into a list of DataFrames
-                dfList[file_path] = pd.read_csv(file_path) # Reads the downloaded CSV file into a DataFrame
-                print(dfList[file_path].head())
+                csv_file = next(file_path.glob("*.csv"))
+                dfList[csv_file] = pd.read_csv(csv_file)
+                print(dfList[csv_file].head())
         except Exception as e: 
             print(f"Error downloading {dataset['kaggle_id']}: {str(e)}") # Log error to the console
             traceback.print_exc() # Display the full traceback for debugging
 
-            # # If the dataset file is not found after attempting to download, raise an error
-            # if not dataset["path"].exists():
-            #     raise FileNotFoundError(f"Dataset {key} not found at {dataset['path']}. Please download it first.")sssss
-      
+            # If the dataset file is not found after attempting to download, raise an error
+            if not dataset["path"].exists():
+                raise FileNotFoundError(f"Dataset {key} not found at {dataset['path']}. Please download it first.")
         
-        
-        # Add preprocessing here if needed
-        
-        return 
+        return dfList
 
 
    

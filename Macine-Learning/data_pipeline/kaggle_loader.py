@@ -17,7 +17,7 @@ class KaggleLoader:
         try:
             logging.info(f"Downloading and unzipping Kaggle dataset: {self.dataset_name} to {self.download_path.resolve()}")
         
-            download_path.mkdir(parents=True, exist_ok=True)  # Ensure folder exists
+            self.download_path.mkdir(parents=True, exist_ok=True)  # Ensure folder exists
         
             # Download and unzip dataset
             kaggle.api.authenticate()
