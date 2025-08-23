@@ -40,8 +40,11 @@ class DataLoader(Exception):
                         
                 # Load the datasets into a list of DataFrames
                 csv_file = next(file_path.glob("*.csv"))
+                print(type(csv_file))
                 dfList[csv_file] = pd.read_csv(csv_file)
-                print(dfList[csv_file].head())
+
+                print("dataloader: " + str(type(dfList[csv_file])))
+                #print(dfList[csv_file].head())
         except Exception as e: 
             print(f"Error downloading {dataset['kaggle_id']}: {str(e)}") # Log error to the console
             traceback.print_exc() # Display the full traceback for debugging
@@ -50,7 +53,7 @@ class DataLoader(Exception):
             if not dataset["path"].exists():
                 raise FileNotFoundError(f"Dataset {key} not found at {dataset['path']}. Please download it first.")
         
-        return dfList
+        return dfList[csv_file]
 
 
    
