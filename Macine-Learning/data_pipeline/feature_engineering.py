@@ -24,17 +24,17 @@ class FeatureEngineering:
             pd.DataFrame: DataFrame with engineered features.
         """
         # Apply feature engineering steps
-        df = clean_amount_column(df, 'Amount') # Clean the 'Amount' column by removing symbols and converting to float
-        df = add_date_features(df, 'Date') # Add date features to the DataFrame
-        df = rolling_features(df, 'Amount', 'Date') # Add rolling features based on
-        df = transaction_type_flag(df, 'TransactionType') 
-        
+        df = FeatureEngineering.clean_amount_column(df, 'Amount') # Clean the 'Amount' column by removing symbols and converting to float
+        df = FeatureEngineering.date_features(df, 'Date') # Add date features to the DataFrame
+        df = FeatureEngineering.rolling_features(df, 'Amount', 'Date') # Add rolling features based on
+        df = FeatureEngineering.transaction_type_flag(df, 'TransactionType')
+
         # Drop rows with missing required values
         df = df.dropna(subset=['Amount', 'Date', 'IsIncome'])
 
         return df
     
-    def date_features(df, date_col='Date'):    
+    def date_features(self, df, date_col='Date'):    
         """
         Extracts useful time-based features from the date.
         
