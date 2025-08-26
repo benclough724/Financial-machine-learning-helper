@@ -127,6 +127,7 @@ function SidebarProvider({
   )
 
   return (
+    <SidebarProvider>
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
         <div
@@ -148,6 +149,7 @@ function SidebarProvider({
         </div>
       </TooltipProvider>
     </SidebarContext.Provider>
+  </SidebarProvider>
   )
 }
 
